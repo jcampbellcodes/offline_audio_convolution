@@ -57,26 +57,26 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-    
+
     AudioVisualizerController inputSignal;
     AudioVisualizerController impulseResponse;
     AudioVisualizerController convolvedSignal;
-    
+
     //[/UserVariables]
 
     //==============================================================================
-    ScopedPointer<Viewport> input_viewport;
-    ScopedPointer<Viewport> ir_viewport;
     ScopedPointer<ComboBox> comboBox;
     ScopedPointer<Label> label;
     ScopedPointer<Label> label2;
-    ScopedPointer<Viewport> convolved_viewport;
     ScopedPointer<Label> label3;
     ScopedPointer<TextButton> textButton;
     ScopedPointer<TextButton> textButton2;
     ScopedPointer<TextButton> textButton3;
     ScopedPointer<TextButton> textButton4;
     ScopedPointer<Label> label4;
+    ScopedPointer<AudioVisualizerController> input_signal;
+    ScopedPointer<AudioVisualizerController> impulse_response;
+    ScopedPointer<AudioVisualizerController> convolved_signal;
 
 
     //==============================================================================

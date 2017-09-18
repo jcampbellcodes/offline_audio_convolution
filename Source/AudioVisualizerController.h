@@ -16,10 +16,21 @@
 //==============================================================================
 /*
 */
+
+enum TransportState
+{
+    Stopped,
+    Starting,
+    Playing,
+    Stopping
+};
+
+
 class AudioVisualizerController    : public Component, public FileDragAndDropTarget, public ChangeListener
 {
 public:
     AudioVisualizerController();
+    AudioVisualizerController(int width, int height);
     ~AudioVisualizerController();
 
     void paint (Graphics&) override;
@@ -30,6 +41,7 @@ public:
     
     void changeListenerCallback (ChangeBroadcaster* source) override;
     void thumbnailChanged();
+    void changeState(TransportState);
 
 private:
     // Model
@@ -38,6 +50,13 @@ private:
     // View
     AudioThumbnailCache thumbnailCache;                  // [1]
     AudioThumbnail thumbnail;                            // [2]
+    
+    AudioFormatManager formatManager;                    // [3]
+    ScopedPointer<AudioFormatReaderSource> readerSource;
+    AudioTransportSource transportSource;
+    TransportState state;
+    
+    File _audioFile;
     
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioVisualizerController)

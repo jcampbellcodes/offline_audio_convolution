@@ -8,7 +8,7 @@
 
 
 todo:
-iteration 1:
+XXXiteration 1XXX:
 drag audio files onto top two viewports and display them
 
 iteration 2:
