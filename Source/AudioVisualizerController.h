@@ -12,17 +12,14 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "AudioVisualizerModel.h"
-#include "AudioVisualizerView.h"
 
 //==============================================================================
 /*
 */
-class AudioVisualizerController    : public Component, public FileDragAndDropTarget
+class AudioVisualizerController    : public Component, public FileDragAndDropTarget, public ChangeListener
 {
 public:
-    AudioVisualizerController() = delete;
-    AudioVisualizerController(AudioVisualizerModel model, AudioVisualizerView view);
-    AudioVisualizerController(AudioVisualizerModel model);
+    AudioVisualizerController();
     ~AudioVisualizerController();
 
     void paint (Graphics&) override;
@@ -30,6 +27,9 @@ public:
     
     bool 	isInterestedInFileDrag (const StringArray &files) override;
     void 	filesDropped (const StringArray &files, int x, int y) override;
+    
+    void changeListenerCallback (ChangeBroadcaster* source) override;
+    void thumbnailChanged();
 
 private:
     // Model

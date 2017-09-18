@@ -21,6 +21,8 @@
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "AudioVisualizerController.h"
+#include "AudioVisualizerModel.h"
 //[/Headers]
 
 
@@ -55,15 +57,20 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
+    
+    AudioVisualizerController inputSignal;
+    AudioVisualizerController impulseResponse;
+    AudioVisualizerController convolvedSignal;
+    
     //[/UserVariables]
 
     //==============================================================================
-    ScopedPointer<Viewport> viewport;
-    ScopedPointer<Viewport> viewport2;
+    ScopedPointer<Viewport> input_viewport;
+    ScopedPointer<Viewport> ir_viewport;
     ScopedPointer<ComboBox> comboBox;
     ScopedPointer<Label> label;
     ScopedPointer<Label> label2;
-    ScopedPointer<Viewport> viewport3;
+    ScopedPointer<Viewport> convolved_viewport;
     ScopedPointer<Label> label3;
     ScopedPointer<TextButton> textButton;
     ScopedPointer<TextButton> textButton2;

@@ -49,3 +49,15 @@ void AudioVisualizerModel::resized()
     // components that your component contains..
 
 }
+
+void AudioVisualizerModel::setAudioFile(const juce::File &file)
+{
+    AudioFormatReader* reader = nullptr;//formatManager.createReaderFor (file);
+    
+    if (reader != nullptr)
+    {
+        ScopedPointer<AudioFormatReaderSource> newSource = new AudioFormatReaderSource (reader, true);
+        transportSource.setSource (newSource, 0, nullptr, reader->sampleRate);
+        readerSource = newSource.release();
+    }
+}

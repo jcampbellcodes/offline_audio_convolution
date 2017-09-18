@@ -27,12 +27,13 @@ public:
     const File& getAudioFile() const;
     void setAudioFile(const File& file);
     
+    AudioFormatManager& getFormatManager() { return this->formatManager; };
+    
 private:
 
     AudioFormatManager formatManager;                    // [3]
     ScopedPointer<AudioFormatReaderSource> readerSource;
     AudioTransportSource transportSource;
-    TransportState state;
     
     File _audioFile;
     

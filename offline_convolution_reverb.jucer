@@ -15,10 +15,6 @@
               file="Source/AudioVisualizerModel.cpp"/>
         <FILE id="J3OXCH" name="AudioVisualizerModel.h" compile="0" resource="0"
               file="Source/AudioVisualizerModel.h"/>
-        <FILE id="G4rJRB" name="AudioVisualizerView.cpp" compile="1" resource="0"
-              file="Source/AudioVisualizerView.cpp"/>
-        <FILE id="B8dJKs" name="AudioVisualizerView.h" compile="0" resource="0"
-              file="Source/AudioVisualizerView.h"/>
       </GROUP>
       <FILE id="BripGc" name="InputSignalDragDrop.cpp" compile="1" resource="0"
             file="Source/InputSignalDragDrop.cpp"/>

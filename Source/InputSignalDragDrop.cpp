@@ -27,14 +27,14 @@
 //[/MiscUserDefs]
 
 //==============================================================================
-InputSignalDragDrop::InputSignalDragDrop ()
+InputSignalDragDrop::InputSignalDragDrop () : inputSignal(), impulseResponse(), convolvedSignal()
 {
     //[Constructor_pre] You can add your own custom stuff here..
     //[/Constructor_pre]
 
-    addAndMakeVisible (viewport = new Viewport ("new viewport"));
+    addAndMakeVisible (input_viewport = new Viewport ("input signal"));
 
-    addAndMakeVisible (viewport2 = new Viewport ("new viewport"));
+    addAndMakeVisible (ir_viewport = new Viewport ("impulse response"));
 
     addAndMakeVisible (comboBox = new ComboBox ("new combo box"));
     comboBox->setEditableText (false);
@@ -62,7 +62,7 @@ InputSignalDragDrop::InputSignalDragDrop ()
     label2->setColour (TextEditor::textColourId, Colours::black);
     label2->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
 
-    addAndMakeVisible (viewport3 = new Viewport ("new viewport"));
+    addAndMakeVisible (convolved_viewport = new Viewport ("convolved signal"));
 
     addAndMakeVisible (label3 = new Label ("new label",
                                            TRANS("output")));
@@ -108,6 +108,13 @@ InputSignalDragDrop::InputSignalDragDrop ()
 
 
     //[Constructor] You can add your own custom stuff here..
+    
+    input_viewport->setViewedComponent(&this->inputSignal, false);
+    addAndMakeVisible(input_viewport);
+    //addAndMakeVisible(<#juce::Component *child#>)
+    ir_viewport->setViewedComponent(&this->impulseResponse, false);
+    convolved_viewport->setViewedComponent(&this->convolvedSignal, false);
+    
     //[/Constructor]
 }
 
@@ -116,12 +123,13 @@ InputSignalDragDrop::~InputSignalDragDrop()
     //[Destructor_pre]. You can add your own custom destruction code here..
     //[/Destructor_pre]
 
-    viewport = nullptr;
-    viewport2 = nullptr;
+    
+    input_viewport = nullptr;
+    ir_viewport = nullptr;
     comboBox = nullptr;
     label = nullptr;
     label2 = nullptr;
-    viewport3 = nullptr;
+    convolved_viewport = nullptr;
     label3 = nullptr;
     textButton = nullptr;
     textButton2 = nullptr;
@@ -151,12 +159,12 @@ void InputSignalDragDrop::resized()
     //[UserPreResize] Add your own custom resize code here..
     //[/UserPreResize]
 
-    viewport->setBounds (0, 72, 304, 184);
-    viewport2->setBounds (384, 72, 320, 184);
+    input_viewport->setBounds (0, 72, 304, 184);
+    ir_viewport->setBounds (384, 72, 320, 184);
     comboBox->setBounds (560, 0, 150, 24);
     label->setBounds (0, 48, 150, 24);
     label2->setBounds (376, 48, 216, 24);
-    viewport3->setBounds (56, 344, 600, 150);
+    convolved_viewport->setBounds (56, 344, 600, 150);
     label3->setBounds (304, 312, 150, 24);
     textButton->setBounds (96, 504, 150, 24);
     textButton2->setBounds (272, 504, 150, 24);
@@ -232,11 +240,11 @@ BEGIN_JUCER_METADATA
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330"
                  fixedSize="0" initialWidth="800" initialHeight="600">
   <BACKGROUND backgroundColour="ff7000e7"/>
-  <VIEWPORT name="new viewport" id="683644b7bcaffab7" memberName="viewport"
+  <VIEWPORT name="input signal" id="683644b7bcaffab7" memberName="input_viewport"
             virtualName="" explicitFocusOrder="0" pos="0 72 304 184" vscroll="1"
             hscroll="1" scrollbarThickness="8" contentType="0" jucerFile=""
             contentClass="" constructorParams=""/>
-  <VIEWPORT name="new viewport" id="cadad4d8a9d66381" memberName="viewport2"
+  <VIEWPORT name="impulse response" id="cadad4d8a9d66381" memberName="ir_viewport"
             virtualName="" explicitFocusOrder="0" pos="384 72 320 184" vscroll="1"
             hscroll="1" scrollbarThickness="8" contentType="0" jucerFile=""
             contentClass="" constructorParams=""/>
@@ -253,7 +261,7 @@ BEGIN_JUCER_METADATA
          edBkgCol="0" labelText="impulse response" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" kerning="0" bold="0" italic="0" justification="33"/>
-  <VIEWPORT name="new viewport" id="2a534b4cd8d3d430" memberName="viewport3"
+  <VIEWPORT name="convolved signal" id="2a534b4cd8d3d430" memberName="convolved_viewport"
             virtualName="" explicitFocusOrder="0" pos="56 344 600 150" vscroll="1"
             hscroll="1" scrollbarThickness="8" contentType="0" jucerFile=""
             contentClass="" constructorParams=""/>
