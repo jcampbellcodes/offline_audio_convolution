@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../modules/juce_audio_formats/format/juce_AudioFormatManager.cpp"
+            timestampString = "527401859.666864"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "AudioFormatManager::createReaderFor (InputStream* audioFileStream)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "juce::AudioFormatManager::createReaderFor(juce::InputStream*)"
+                  moduleName = "offline_convolution_reverb"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/JackCampbell/SDKs/JUCE/modules/juce_audio_formats/format/juce_AudioFormatManager.cpp"
+                  timestampString = "527402391.273491"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "27">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "juce::AudioFormatManager::createReaderFor(juce::InputStream*)"
+                  moduleName = "DSP module plugin demo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/JackCampbell/SDKs/JUCE/examples/DSP%20module%20plugin%20demo/Builds/MacOSX/../../../../modules/juce_audio_formats/format/juce_AudioFormatManager.cpp"
+                  timestampString = "527402391.581751"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "154"
+                  endingLineNumber = "154"
+                  offsetFromSymbolStart = "27">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Source/MainComponent.cpp"
+            timestampString = "527740425.090826"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "privSetAudioFile(const juce::File &amp;file)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
