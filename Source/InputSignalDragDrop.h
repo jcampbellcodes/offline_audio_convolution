@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.1.1
+  Created with Projucer version: 5.1.2
 
   ------------------------------------------------------------------------------
 
@@ -20,9 +20,10 @@
 #pragma once
 
 //[Headers]     -- You can add your own extra header files here --
+#ifndef INPUTDRAGDROP
+#define INPUTDRAGDROP
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "AudioVisualizerController.h"
-#include "AudioVisualizerModel.h"
+#include "./AudioVisualizerController.h"
 //[/Headers]
 
 
@@ -36,8 +37,8 @@
                                                                     //[/Comments]
 */
 class InputSignalDragDrop  : public Component,
-                             public ComboBoxListener,
-                             public ButtonListener
+                             public ComboBox::Listener,
+                             public Button::Listener
 {
 public:
     //==============================================================================
@@ -58,9 +59,9 @@ public:
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
 
-    AudioVisualizerController inputSignal;
-    AudioVisualizerController impulseResponse;
-    AudioVisualizerController convolvedSignal;
+    //AudioVisualizerController inputSignal;
+    //AudioVisualizerController impulseResponse;
+    //AudioVisualizerController convolvedSignal;
 
     //[/UserVariables]
 
@@ -84,4 +85,5 @@ private:
 };
 
 //[EndFile] You can add extra defines here...
+#endif
 //[/EndFile]

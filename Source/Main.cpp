@@ -9,8 +9,7 @@
 */
 
 #include "../JuceLibraryCode/JuceHeader.h"
-
-Component* createMainContentComponent();
+#include "./AudioPlayer.h"
 
 //==============================================================================
 class offline_convolution_reverbApplication  : public JUCEApplication
@@ -67,7 +66,7 @@ public:
                                                     DocumentWindow::allButtons)
         {
             setUsingNativeTitleBar (true);
-            setContentOwned (createMainContentComponent(), true);
+            setContentOwned (&AudioPlayer::Instance(), true);
             setResizable (true, true);
 
             centreWithSize (getWidth(), getHeight());

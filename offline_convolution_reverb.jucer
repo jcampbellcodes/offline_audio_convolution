@@ -3,7 +3,7 @@
 <JUCERPROJECT id="CFqlQ5" name="offline_convolution_reverb" displaySplashScreen="1"
               reportAppUsage="1" splashScreenColour="Dark" projectType="guiapp"
               version="1.0.0" bundleIdentifier="com.yourcompany.offline_convolution_reverb"
-              includeBinaryInAppConfig="1" cppLanguageStandard="11" jucerVersion="5.1.1">
+              includeBinaryInAppConfig="1" cppLanguageStandard="11" jucerVersion="5.1.2">
   <MAINGROUP id="WvgGWR" name="offline_convolution_reverb">
     <GROUP id="{86E8AA46-FF8F-29CF-58AF-B2D26B5D3C24}" name="Source">
       <GROUP id="{0C3DF239-336F-27E5-03FE-DD817AFABF8C}" name="AudioVisualizer">
@@ -11,17 +11,13 @@
               resource="0" file="Source/AudioVisualizerController.cpp"/>
         <FILE id="NnKQPP" name="AudioVisualizerController.h" compile="0" resource="0"
               file="Source/AudioVisualizerController.h"/>
-        <FILE id="SYeNSP" name="AudioVisualizerModel.cpp" compile="1" resource="0"
-              file="Source/AudioVisualizerModel.cpp"/>
-        <FILE id="J3OXCH" name="AudioVisualizerModel.h" compile="0" resource="0"
-              file="Source/AudioVisualizerModel.h"/>
       </GROUP>
       <FILE id="BripGc" name="InputSignalDragDrop.cpp" compile="1" resource="0"
             file="Source/InputSignalDragDrop.cpp"/>
       <FILE id="onlybx" name="InputSignalDragDrop.h" compile="0" resource="0"
             file="Source/InputSignalDragDrop.h"/>
-      <FILE id="xSZr2L" name="MainComponent.cpp" compile="1" resource="0"
-            file="Source/MainComponent.cpp"/>
+      <FILE id="xSZr2L" name="AudioPlayer.cpp" compile="1" resource="0" file="Source/AudioPlayer.cpp"/>
+      <FILE id="AFmcJZ" name="AudioPlayer.h" compile="0" resource="0" file="Source/AudioPlayer.h"/>
       <FILE id="SbYHCG" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
     </GROUP>
     <FILE id="y9flYc" name="readme.md" compile="0" resource="1" file="Source/readme.md"/>

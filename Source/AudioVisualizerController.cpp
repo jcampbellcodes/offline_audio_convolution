@@ -9,29 +9,33 @@
 */
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "AudioVisualizerController.h"
+#include "./AudioVisualizerController.h"
+#include "./AudioPlayer.h"
+
 
 //==============================================================================
-AudioVisualizerController::AudioVisualizerController() : _model(), thumbnailCache(1), thumbnail(515, formatManager, thumbnailCache)
+/*
+AudioVisualizerController::AudioVisualizerController() : state(Stopped), thumbnailCache(5), thumbnail(512, formatManager, thumbnailCache)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
-    
-    formatManager.registerBasicFormats();
-    
-    this->thumbnail.addChangeListener(this);
     setSize (400, 600);
-}
+    formatManager.registerBasicFormats();
+    
+    this->thumbnail.addChangeListener(this);
+    setAudioChannels (2, 2);
+}*/
 
-AudioVisualizerController::AudioVisualizerController(int width, int height) : _model(), thumbnailCache(1), thumbnail(515, formatManager, thumbnailCache)
+
+AudioVisualizerController::AudioVisualizerController(int width, int height) : thumbnailCache(5), thumbnail(512, formatManager, thumbnailCache)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
+    setSize (width, height);
     
     formatManager.registerBasicFormats();
     
     this->thumbnail.addChangeListener(this);
-    setSize (width, height);
 }
 
 AudioVisualizerController::~AudioVisualizerController()
@@ -81,65 +85,13 @@ void AudioVisualizerController::filesDropped (const StringArray &files, int, int
 {
     printf("file name: %s", files[0].toRawUTF8());
     File file(files[0]);
-    AudioFormatReader* reader = formatManager.createReaderFor (file);
-    
-    if (reader != nullptr)
-    {
-        ScopedPointer<AudioFormatReaderSource> newSource = new AudioFormatReaderSource (reader, true);
-        transportSource.setSource (newSource, 0, nullptr, reader->sampleRate);
-        //playButton.setEnabled (true);
-        thumbnail.setSource (new FileInputSource (file));          // [7]
-        readerSource = newSource.release();
-    }
-    //this->_model.setAudioFile(file);
+    this->_audioFile = file;
+    AudioPlayer::setAudioFile(file);
+    thumbnail.setSource (new FileInputSource (file));          // [7]
    
 }
 
 void AudioVisualizerController::changeListenerCallback (ChangeBroadcaster* source)
 {
-    if (source == &transportSource)
-    {
-        if (transportSource.isPlaying())
-            changeState (Playing);
-        else
-            changeState (Stopped);
-    }
-    
-    
-    if (source == &thumbnail)        thumbnailChanged();
-}
-
-void AudioVisualizerController::changeState(TransportState newState)
-{
-    if (state != newState)
-    {
-        state = newState;
-        
-        switch (state)
-        {
-            case Stopped:                           // [3]
-                //stopButton.setEnabled (false);
-                //playButton.setEnabled (true);
-                transportSource.setPosition (0.0);
-                break;
-                
-            case Starting:                          // [4]
-                //playButton.setEnabled (false);
-                transportSource.start();
-                break;
-                
-            case Playing:                           // [5]
-                //stopButton.setEnabled (true);
-                break;
-                
-            case Stopping:                          // [6]
-                transportSource.stop();
-                break;
-        }
-    }
-}
-
-void AudioVisualizerController::thumbnailChanged()
-{
-    repaint();
+    if (source == &thumbnail)        repaint();
 }

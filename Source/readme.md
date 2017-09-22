@@ -11,6 +11,8 @@ todo:
 XXXiteration 1XXX:
 drag audio files onto top two viewports and display them
 
+iteration 1.
+
 iteration 2:
 be able to play these audio files
 
