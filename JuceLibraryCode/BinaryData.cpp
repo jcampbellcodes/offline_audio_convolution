@@ -9,39 +9,32 @@ namespace BinaryData
 
 //================== readme.md ==================
 static const unsigned char temp_binary_data_0[] =
-"***OFFLINE CONVOLUTION REVERB***\r\n"
-"*jack campbell*\r\n"
-"\r\n"
-"--- how to build\r\n"
-"- grab the JUCE Library code, create builds directory\r\n"
-"- use this source directory and jucer file\r\n"
-"\r\n"
-"\r\n"
-"\r\n"
-"todo:\r\n"
-"XXXiteration 1XXX:\r\n"
-"drag audio files onto top two viewports and display them\r\n"
-"\r\n"
-"iteration 1.\r\n"
-"\r\n"
-"iteration 2:\r\n"
-"be able to play these audio files\r\n"
-"\r\n"
-"iteration 3:\r\n"
-"on generate button click, convolve the two audio files, save the result and display it in a new AudioVisualizer on the bottom\r\n"
-"\r\n"
-"iteration 4:\r\n"
-"save the result as a WAV or OGG file\r\n"
-"\r\n"
-"\r\n"
-"\r\n"
-"-- AudioVisualizerModel\r\n"
-"- contains reference to loaded audio file\r\n"
-"- getter/setter for audio file\r\n"
-"\r\n"
-"-- AudioVisualizerController (drag and drop listener)\r\n"
-"- listener for dragging an audio file onto the viewport; sets its model's file and \r\n"
-"- has a view: the AudioThumbnail and AudioThumbnailClass components. updates this as necessary\r\n";
+"***OFFLINE CONVOLUTION REVERB***\n"
+"*jack campbell*\n"
+"\n"
+"--- how to build\n"
+"- grab the JUCE Library code, create builds directory\n"
+"- use this source directory and jucer file\n"
+"\n"
+"\n"
+"\n"
+"todo:\n"
+"\n"
+"iteration 3:\n"
+"on generate button click, convolve the two audio files, save the result and display it in a new AudioVisualizer on the bottom\n"
+"\n"
+"iteration 4:\n"
+"save the result as a WAV or OGG file\n"
+"\n"
+"\n"
+"\n"
+"-- AudioVisualizerModel\n"
+"- contains reference to loaded audio file\n"
+"- getter/setter for audio file\n"
+"\n"
+"-- AudioVisualizerController (drag and drop listener)\n"
+"- listener for dragging an audio file onto the viewport; sets its model's file and \n"
+"- has a view: the AudioThumbnail and AudioThumbnailClass components. updates this as necessary\n";
 
 const char* readme_md = (const char*) temp_binary_data_0;
 
@@ -56,7 +49,7 @@ const char* getNamedResource (const char* resourceNameUTF8, int& numBytes) throw
 
     switch (hash)
     {
-        case 0xbe6091c8:  numBytes = 869; return readme_md;
+        case 0xbe6091c8:  numBytes = 698; return readme_md;
         default: break;
     }
 

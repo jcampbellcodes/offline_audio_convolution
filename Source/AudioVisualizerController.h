@@ -28,12 +28,12 @@ public:
     void paint (Graphics&) override;
     void resized() override;
     
-    bool 	isInterestedInFileDrag (const StringArray &files) override;
-    void 	filesDropped (const StringArray &files, int x, int y) override;
+    virtual bool 	isInterestedInFileDrag (const StringArray &files) override;
+    virtual void 	filesDropped (const StringArray &files, int x, int y) override;
     
     void changeListenerCallback (ChangeBroadcaster* source) override;
 
-private:
+protected:
     
 
     AudioThumbnailCache thumbnailCache;                  // [1]

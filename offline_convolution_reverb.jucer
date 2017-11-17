@@ -3,10 +3,28 @@
 <JUCERPROJECT id="CFqlQ5" name="offline_convolution_reverb" displaySplashScreen="1"
               reportAppUsage="1" splashScreenColour="Dark" projectType="guiapp"
               version="1.0.0" bundleIdentifier="com.yourcompany.offline_convolution_reverb"
-              includeBinaryInAppConfig="1" cppLanguageStandard="11" jucerVersion="5.1.2">
+              includeBinaryInAppConfig="1" cppLanguageStandard="11" jucerVersion="5.1.1">
   <MAINGROUP id="WvgGWR" name="offline_convolution_reverb">
     <GROUP id="{86E8AA46-FF8F-29CF-58AF-B2D26B5D3C24}" name="Source">
       <GROUP id="{0C3DF239-336F-27E5-03FE-DD817AFABF8C}" name="AudioVisualizer">
+        <GROUP id="{7C79A8D6-5229-5DFD-8E88-2B4988506297}" name="OutputVisualizer">
+          <FILE id="QUCTOo" name="OutputVisualizer.cpp" compile="1" resource="0"
+                file="Source/OutputVisualizer.cpp"/>
+          <FILE id="oxCWUy" name="OutputVisualizer.h" compile="0" resource="0"
+                file="Source/OutputVisualizer.h"/>
+        </GROUP>
+        <GROUP id="{71E2E15E-8DBD-8B6C-E775-B735AF3348E8}" name="ImpulseVisualizer">
+          <FILE id="ARnHRF" name="ImpulseVisualizer.cpp" compile="1" resource="0"
+                file="Source/ImpulseVisualizer.cpp"/>
+          <FILE id="DQHuk9" name="ImpulseVisualizer.h" compile="0" resource="0"
+                file="Source/ImpulseVisualizer.h"/>
+        </GROUP>
+        <GROUP id="{6E5C35A4-7B81-557A-F97E-CC1FCE0C018F}" name="InputVisualizer">
+          <FILE id="HkMeSQ" name="InputVisualizer.cpp" compile="1" resource="0"
+                file="Source/InputVisualizer.cpp"/>
+          <FILE id="CNoRxP" name="InputVisualizer.h" compile="0" resource="0"
+                file="Source/InputVisualizer.h"/>
+        </GROUP>
         <FILE id="u4Y2A6" name="AudioVisualizerController.cpp" compile="1"
               resource="0" file="Source/AudioVisualizerController.cpp"/>
         <FILE id="NnKQPP" name="AudioVisualizerController.h" compile="0" resource="0"

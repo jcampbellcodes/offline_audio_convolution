@@ -78,7 +78,7 @@ void AudioVisualizerController::resized()
 
 bool AudioVisualizerController::isInterestedInFileDrag (const StringArray &files)
 {
-    printf("interested in file drag");
+    printf("interested in file drag\n");
     return true;
 }
 void AudioVisualizerController::filesDropped (const StringArray &files, int, int)

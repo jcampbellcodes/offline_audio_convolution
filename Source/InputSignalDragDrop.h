@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.1.2
+  Created with Projucer version: 5.1.1
 
   ------------------------------------------------------------------------------
 
@@ -23,7 +23,9 @@
 #ifndef INPUTDRAGDROP
 #define INPUTDRAGDROP
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "./AudioVisualizerController.h"
+#include "./InputVisualizer.h"
+#include "./ImpulseVisualizer.h"
+#include "./OutputVisualizer.h"
 //[/Headers]
 
 
@@ -37,8 +39,8 @@
                                                                     //[/Comments]
 */
 class InputSignalDragDrop  : public Component,
-                             public ComboBox::Listener,
-                             public Button::Listener
+                             public ComboBoxListener,
+                             public ButtonListener
 {
 public:
     //==============================================================================

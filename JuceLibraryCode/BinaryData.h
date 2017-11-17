@@ -9,7 +9,7 @@
 namespace BinaryData
 {
     extern const char*   readme_md;
-    const int            readme_mdSize = 869;
+    const int            readme_mdSize = 698;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

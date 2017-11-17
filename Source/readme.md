@@ -8,13 +8,6 @@
 
 
 todo:
-XXXiteration 1XXX:
-drag audio files onto top two viewports and display them
-
-iteration 1.
-
-iteration 2:
-be able to play these audio files
 
 iteration 3:
 on generate button click, convolve the two audio files, save the result and display it in a new AudioVisualizer on the bottom
