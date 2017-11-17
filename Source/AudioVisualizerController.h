@@ -29,9 +29,10 @@ public:
     void resized() override;
     
     virtual bool 	isInterestedInFileDrag (const StringArray &files) override;
-    virtual void 	filesDropped (const StringArray &files, int x, int y) override;
+    virtual void 	filesDropped (const StringArray &files, int x, int y) override = 0;
     
     void changeListenerCallback (ChangeBroadcaster* source) override;
+
 
 protected:
     

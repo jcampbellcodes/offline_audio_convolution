@@ -42,13 +42,23 @@ class AudioPlayer   : public AudioAppComponent, public ChangeListener
 {
 public:
 
-
+    void privSetInputFile(const juce::File &file);
+    void privSetImpulseFile(const juce::File &file);
+    void privStartPlaying();
     
-    void privSetAudioFile(const juce::File &file);
-    
-    static void setAudioFile(juce::File &file)
+    static void setInputFile(juce::File &file)
     {
-        AudioPlayer::Instance().privSetAudioFile(file);
+        AudioPlayer::Instance().privSetInputFile(file);
+    }
+    
+    static void setImpulseFile(juce::File &file)
+    {
+        AudioPlayer::Instance().privSetImpulseFile(file);
+    }
+    
+    static void StartPlaying()
+    {
+        AudioPlayer::Instance().privStartPlaying();
     }
     
     void changeState(TransportState newState);
@@ -61,7 +71,7 @@ public:
     
     void releaseResources() override;
     
-    
+    void reset();
 
     //==============================================================================
     void paint (Graphics& g) override;
@@ -97,8 +107,10 @@ private:
     ScopedPointer<AudioFormatReaderSource> readerSource;
     AudioTransportSource transportSource;
 
+    dsp::Convolution convolution;
     
-    
+    File _inputFile;
+    File _impulseFile;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AudioPlayer)
 };

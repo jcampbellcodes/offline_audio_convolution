@@ -68,7 +68,6 @@ void AudioVisualizerController::paint (Graphics& g)
                                 1.0f);                                  // vertical zoom
     }
 }
-
 void AudioVisualizerController::resized()
 {
     // This method is where you should set the bounds of any child
@@ -80,15 +79,6 @@ bool AudioVisualizerController::isInterestedInFileDrag (const StringArray &files
 {
     printf("interested in file drag\n");
     return true;
-}
-void AudioVisualizerController::filesDropped (const StringArray &files, int, int)
-{
-    printf("file name: %s", files[0].toRawUTF8());
-    File file(files[0]);
-    this->_audioFile = file;
-    AudioPlayer::setAudioFile(file);
-    thumbnail.setSource (new FileInputSource (file));          // [7]
-   
 }
 
 void AudioVisualizerController::changeListenerCallback (ChangeBroadcaster* source)

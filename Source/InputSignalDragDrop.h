@@ -72,14 +72,14 @@ private:
     ScopedPointer<Label> label;
     ScopedPointer<Label> label2;
     ScopedPointer<Label> label3;
-    ScopedPointer<TextButton> textButton;
-    ScopedPointer<TextButton> textButton2;
+    ScopedPointer<TextButton> play_btn;
+    ScopedPointer<TextButton> stop_btn;
     ScopedPointer<TextButton> textButton3;
-    ScopedPointer<TextButton> textButton4;
+    ScopedPointer<TextButton> generate_btn;
     ScopedPointer<Label> label4;
-    ScopedPointer<AudioVisualizerController> input_signal;
-    ScopedPointer<AudioVisualizerController> impulse_response;
-    ScopedPointer<AudioVisualizerController> convolved_signal;
+    ScopedPointer<InputVisualizer> input_signal;
+    ScopedPointer<ImpulseVisualizer> impulse_response;
+    ScopedPointer<OutputVisualizer> convolved_signal;
 
 
     //==============================================================================

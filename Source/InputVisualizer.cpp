@@ -9,6 +9,7 @@
 */
 
 #include "InputVisualizer.h"
+#include "AudioPlayer.h"
 
 InputVisualizer::InputVisualizer(int width, int height) : AudioVisualizerController(width, height) {};
 
@@ -19,6 +20,7 @@ void InputVisualizer::filesDropped (const StringArray &files, int, int)
     printf("file name: %s", files[0].toRawUTF8());
     File file(files[0]);
     this->_audioFile = file;
+    AudioPlayer::setInputFile(file);
     thumbnail.setSource (new FileInputSource (file));          // [7]
     
 }

@@ -15,9 +15,18 @@
     your controls and content.
 */
 AudioPlayer* AudioPlayer::instance = nullptr;
-void AudioPlayer::privSetAudioFile(const juce::File &file)
+
+void AudioPlayer::privSetInputFile(const juce::File &file)
 {
-    AudioFormatReader* reader = formatManager.createReaderFor (file);
+    this->_inputFile = file;
+}
+void AudioPlayer::privSetImpulseFile(const juce::File &file)
+{
+    this->_impulseFile = file;
+}
+void AudioPlayer::privStartPlaying()
+{
+    AudioFormatReader* reader = formatManager.createReaderFor (this->_inputFile);
     changeState(Stopping);
     if (reader != nullptr)
     {
@@ -27,6 +36,8 @@ void AudioPlayer::privSetAudioFile(const juce::File &file)
         changeState(Starting);
     }
 }
+
+
 void AudioPlayer::changeState(TransportState newState)
 {
     if (state != newState)
@@ -65,15 +76,29 @@ void AudioPlayer::changeListenerCallback (ChangeBroadcaster* source)
 }
 void AudioPlayer::prepareToPlay (int samplesPerBlockExpected, double sampleRate)
 {
+    dsp::ProcessSpec spec {sampleRate, static_cast<uint32>(samplesPerBlockExpected), 2};
+    convolution.prepare(spec);
     transportSource.prepareToPlay (samplesPerBlockExpected, sampleRate);
+    
+    // after here it can load the impulse response
+    convolution.loadImpulseResponse(this->_impulseFile, true, this->_impulseFile.getSize());
+}
+
+void AudioPlayer::reset()
+{
+    this->convolution.reset();
 }
 
 void AudioPlayer::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
 {
     if (readerSource == nullptr)
             bufferToFill.clearActiveBufferRegion();
-        else
-            transportSource.getNextAudioBlock (bufferToFill);
+    else
+    {
+        dsp::AudioBlock<float> block (*bufferToFill.buffer, (size_t)bufferToFill.startSample);
+        this->convolution.process(dsp::ProcessContextReplacing<float>(block));
+        transportSource.getNextAudioBlock (bufferToFill);
+    }
 }
 
 void AudioPlayer::releaseResources()
