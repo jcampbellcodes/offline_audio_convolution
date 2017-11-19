@@ -3,7 +3,8 @@
 <JUCERPROJECT id="CFqlQ5" name="offline_convolution_reverb" displaySplashScreen="1"
               reportAppUsage="1" splashScreenColour="Dark" projectType="guiapp"
               version="1.0.0" bundleIdentifier="com.yourcompany.offline_convolution_reverb"
-              includeBinaryInAppConfig="1" cppLanguageStandard="11" jucerVersion="5.1.1">
+              includeBinaryInAppConfig="1" cppLanguageStandard="11" jucerVersion="5.2.0"
+              companyCopyright="">
   <MAINGROUP id="WvgGWR" name="offline_convolution_reverb">
     <GROUP id="{86E8AA46-FF8F-29CF-58AF-B2D26B5D3C24}" name="Source">
       <GROUP id="{0C3DF239-336F-27E5-03FE-DD817AFABF8C}" name="AudioVisualizer">
@@ -43,8 +44,10 @@
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="offline_convolution_reverb"/>
-        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="offline_convolution_reverb"/>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="offline_convolution_reverb"
+                       enablePluginBinaryCopyStep="1"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="offline_convolution_reverb"
+                       enablePluginBinaryCopyStep="1"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="../modules"/>

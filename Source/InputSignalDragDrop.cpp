@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.1.1
+  Created with Projucer version: 5.2.0
 
   ------------------------------------------------------------------------------
 
@@ -105,6 +105,21 @@ InputSignalDragDrop::InputSignalDragDrop ()
                                                                 ));
     convolved_signal->setName ("convolved signal");
 
+    addAndMakeVisible (knoblabel = new Label ("new label",
+                                              TRANS("balance")));
+    knoblabel->setFont (Font (15.60f, Font::plain).withTypefaceStyle ("Regular"));
+    knoblabel->setJustificationType (Justification::centredLeft);
+    knoblabel->setEditable (false, false, false);
+    knoblabel->setColour (TextEditor::textColourId, Colours::black);
+    knoblabel->setColour (TextEditor::backgroundColourId, Colour (0x00000000));
+
+    addAndMakeVisible (balance_knob = new Slider ("new slider"));
+    balance_knob->setExplicitFocusOrder (1);
+    balance_knob->setRange (0, 1, 0);
+    balance_knob->setSliderStyle (Slider::RotaryHorizontalVerticalDrag);
+    balance_knob->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
+    balance_knob->addListener (this);
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -133,6 +148,8 @@ InputSignalDragDrop::~InputSignalDragDrop()
     input_signal = nullptr;
     impulse_response = nullptr;
     convolved_signal = nullptr;
+    knoblabel = nullptr;
+    balance_knob = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -156,19 +173,22 @@ void InputSignalDragDrop::resized()
     //[UserPreResize] Add your own custom resize code here..
     //[/UserPreResize]
 
-    comboBox->setBounds (560, 0, 150, 24);
-    label->setBounds (88, 48, 88, 24);
-    label2->setBounds (464, 48, 112, 24);
-    label3->setBounds (312, 312, 48, 24);
-    play_btn->setBounds (96, 504, 150, 24);
-    stop_btn->setBounds (272, 504, 150, 24);
-    textButton3->setBounds (464, 504, 150, 24);
-    generate_btn->setBounds (288, 272, 104, 24);
-    label4->setBounds (280, 152, 112, 24);
-    input_signal->setBounds (8, 80, 264, 160);
-    impulse_response->setBounds (392, 80, 264, 160);
-    convolved_signal->setBounds (88, 344, 528, 144);
+    comboBox->setBounds (proportionOfWidth (0.7876f), proportionOfHeight (0.0000f), proportionOfWidth (0.2110f), proportionOfHeight (0.0410f));
+    label->setBounds (proportionOfWidth (0.1238f), proportionOfHeight (0.0819f), proportionOfWidth (0.1238f), proportionOfHeight (0.0410f));
+    label2->setBounds (proportionOfWidth (0.7314f), proportionOfHeight (0.0819f), proportionOfWidth (0.1575f), proportionOfHeight (0.0410f));
+    label3->setBounds (328, 312, 48, 24);
+    play_btn->setBounds (proportionOfWidth (0.1350f), proportionOfHeight (0.8601f), proportionOfWidth (0.2110f), proportionOfHeight (0.0410f));
+    stop_btn->setBounds (proportionOfWidth (0.3826f), proportionOfHeight (0.8601f), proportionOfWidth (0.2110f), proportionOfHeight (0.0410f));
+    textButton3->setBounds (proportionOfWidth (0.6526f), proportionOfHeight (0.8601f), proportionOfWidth (0.2110f), proportionOfHeight (0.0410f));
+    generate_btn->setBounds (proportionOfWidth (0.4163f), proportionOfHeight (0.4642f), proportionOfWidth (0.1463f), proportionOfHeight (0.0410f));
+    label4->setBounds (proportionOfWidth (0.4163f), proportionOfHeight (0.0000f), proportionOfWidth (0.1575f), proportionOfHeight (0.0410f));
+    input_signal->setBounds (proportionOfWidth (0.0000f), proportionOfHeight (0.1365f), proportionOfWidth (0.3713f), proportionOfHeight (0.2730f));
+    impulse_response->setBounds (proportionOfWidth (0.6189f), proportionOfHeight (0.1365f), proportionOfWidth (0.3713f), proportionOfHeight (0.2730f));
+    convolved_signal->setBounds (proportionOfWidth (0.0000f), proportionOfHeight (0.5870f), proportionOfWidth (1.0014f), proportionOfHeight (0.2457f));
+    knoblabel->setBounds (proportionOfWidth (0.4501f), proportionOfHeight (0.1911f), proportionOfWidth (0.0900f), proportionOfHeight (0.0410f));
+    balance_knob->setBounds (proportionOfWidth (0.4051f), proportionOfHeight (0.2457f), proportionOfWidth (0.1688f), proportionOfHeight (0.1502f));
     //[UserResized] Add your own custom resize handling here..
+    balance_knob->setValue(0.5);
     //[/UserResized]
 }
 
@@ -218,6 +238,22 @@ void InputSignalDragDrop::buttonClicked (Button* buttonThatWasClicked)
     //[/UserbuttonClicked_Post]
 }
 
+void InputSignalDragDrop::sliderValueChanged (Slider* sliderThatWasMoved)
+{
+    //[UsersliderValueChanged_Pre]
+    //[/UsersliderValueChanged_Pre]
+
+    if (sliderThatWasMoved == balance_knob)
+    {
+        //[UserSliderCode_balance_knob] -- add your slider handling code here..
+        AudioPlayer::setBalance(float(balance_knob->getValue()));
+        //[/UserSliderCode_balance_knob]
+    }
+
+    //[UsersliderValueChanged_Post]
+    //[/UsersliderValueChanged_Post]
+}
+
 
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
@@ -239,49 +275,65 @@ BEGIN_JUCER_METADATA
                  fixedSize="0" initialWidth="800" initialHeight="600">
   <BACKGROUND backgroundColour="ff7000e7"/>
   <COMBOBOX name="new combo box" id="2df48afdde95becd" memberName="comboBox"
-            virtualName="" explicitFocusOrder="0" pos="560 0 150 24" editable="0"
-            layout="33" items="FIR&#10;FFT&#10;" textWhenNonSelected="" textWhenNoItems="FIR"/>
+            virtualName="" explicitFocusOrder="0" pos="78.762% 0% 21.097% 4.096%"
+            editable="0" layout="33" items="FIR&#10;FFT&#10;" textWhenNonSelected=""
+            textWhenNoItems="FIR"/>
   <LABEL name="new label" id="7e501145e4d68d84" memberName="label" virtualName=""
-         explicitFocusOrder="0" pos="88 48 88 24" edTextCol="ff000000"
+         explicitFocusOrder="0" pos="12.377% 8.191% 12.377% 4.096%" edTextCol="ff000000"
          edBkgCol="0" labelText="input signal" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" kerning="0" bold="0" italic="0" justification="33"/>
   <LABEL name="new label" id="3a2472127aa01e06" memberName="label2" virtualName=""
-         explicitFocusOrder="0" pos="464 48 112 24" edTextCol="ff000000"
+         explicitFocusOrder="0" pos="73.136% 8.191% 15.752% 4.096%" edTextCol="ff000000"
          edBkgCol="0" labelText="impulse response" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" kerning="0" bold="0" italic="0" justification="33"/>
   <LABEL name="new label" id="947256eccf805144" memberName="label3" virtualName=""
-         explicitFocusOrder="0" pos="312 312 48 24" edTextCol="ff000000"
+         explicitFocusOrder="0" pos="328 312 48 24" edTextCol="ff000000"
          edBkgCol="0" labelText="output" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          kerning="0" bold="0" italic="0" justification="33"/>
   <TEXTBUTTON name="new button" id="9828601046c46721" memberName="play_btn"
-              virtualName="" explicitFocusOrder="0" pos="96 504 150 24" bgColOff="ff13c607"
-              buttonText="play" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+              virtualName="" explicitFocusOrder="0" pos="13.502% 86.007% 21.097% 4.096%"
+              bgColOff="ff13c607" buttonText="play" connectedEdges="0" needsCallback="1"
+              radioGroupId="0"/>
   <TEXTBUTTON name="new button" id="e403bf2fb01af142" memberName="stop_btn"
-              virtualName="" explicitFocusOrder="0" pos="272 504 150 24" bgColOff="ffdc143c"
-              buttonText="stop" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+              virtualName="" explicitFocusOrder="0" pos="38.256% 86.007% 21.097% 4.096%"
+              bgColOff="ffdc143c" buttonText="stop" connectedEdges="0" needsCallback="1"
+              radioGroupId="0"/>
   <TEXTBUTTON name="new button" id="aa9a7381001db93b" memberName="textButton3"
-              virtualName="" explicitFocusOrder="0" pos="464 504 150 24" bgColOff="ff0611d0"
-              buttonText="save..." connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+              virtualName="" explicitFocusOrder="0" pos="65.26% 86.007% 21.097% 4.096%"
+              bgColOff="ff0611d0" buttonText="save..." connectedEdges="0" needsCallback="1"
+              radioGroupId="0"/>
   <TEXTBUTTON name="new button" id="54b07578b1563b5e" memberName="generate_btn"
-              virtualName="" explicitFocusOrder="0" pos="288 272 104 24" bgColOff="ff680086"
-              buttonText="generate" connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+              virtualName="" explicitFocusOrder="0" pos="41.632% 46.416% 14.627% 4.096%"
+              bgColOff="ff680086" buttonText="generate" connectedEdges="0"
+              needsCallback="1" radioGroupId="0"/>
   <LABEL name="new label" id="155bf9d0f038cd6e" memberName="label4" virtualName=""
-         explicitFocusOrder="0" pos="280 152 112 24" edTextCol="ff000000"
+         explicitFocusOrder="0" pos="41.632% 0% 15.752% 4.096%" edTextCol="ff000000"
          edBkgCol="0" labelText="offline convolver" editableSingleClick="0"
          editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
          fontsize="15" kerning="0" bold="0" italic="0" justification="33"/>
   <GENERICCOMPONENT name="input signal" id="40a5ca03491cd6a1" memberName="input_signal"
-                    virtualName="" explicitFocusOrder="0" pos="8 80 264 160" class="InputVisualizer"
-                    params="320, 160"/>
+                    virtualName="" explicitFocusOrder="0" pos="0% 13.652% 37.131% 27.304%"
+                    class="InputVisualizer" params="320, 160"/>
   <GENERICCOMPONENT name="impulse response" id="d326fe927b8ccec" memberName="impulse_response"
-                    virtualName="" explicitFocusOrder="0" pos="392 80 264 160" class="ImpulseVisualizer"
-                    params="320, 160"/>
+                    virtualName="" explicitFocusOrder="0" pos="61.885% 13.652% 37.131% 27.304%"
+                    class="ImpulseVisualizer" params="320, 160"/>
   <GENERICCOMPONENT name="convolved signal" id="bf0184a07e7f25db" memberName="convolved_signal"
-                    virtualName="" explicitFocusOrder="0" pos="88 344 528 144" class="OutputVisualizer"
-                    params="528, 144, this-&gt;input_signal, this-&gt;impulse_response&#10;"/>
+                    virtualName="" explicitFocusOrder="0" pos="0% 58.703% 100.141% 24.573%"
+                    class="OutputVisualizer" params="528, 144, this-&gt;input_signal, this-&gt;impulse_response&#10;"/>
+  <LABEL name="new label" id="fa94c46cf23083d" memberName="knoblabel"
+         virtualName="" explicitFocusOrder="0" pos="45.007% 19.113% 9.001% 4.096%"
+         edTextCol="ff000000" edBkgCol="0" labelText="balance" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15.599999999999999645" kerning="0" bold="0" italic="0"
+         justification="33"/>
+  <SLIDER name="new slider" id="5f2f30d110b8dfa5" memberName="balance_knob"
+          virtualName="" explicitFocusOrder="1" pos="40.506% 24.573% 16.878% 15.017%"
+          min="0" max="1" int="0" style="RotaryHorizontalVerticalDrag"
+          textBoxPos="TextBoxBelow" textBoxEditable="1" textBoxWidth="80"
+          textBoxHeight="20" skewFactor="1" needsCallback="1"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

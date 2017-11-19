@@ -14,18 +14,6 @@
 
 
 //==============================================================================
-/*
-AudioVisualizerController::AudioVisualizerController() : state(Stopped), thumbnailCache(5), thumbnail(512, formatManager, thumbnailCache)
-{
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
-    setSize (400, 600);
-    formatManager.registerBasicFormats();
-    
-    this->thumbnail.addChangeListener(this);
-    setAudioChannels (2, 2);
-}*/
-
 
 AudioVisualizerController::AudioVisualizerController(int width, int height) : thumbnailCache(5), thumbnail(512, formatManager, thumbnailCache)
 {
@@ -59,7 +47,7 @@ void AudioVisualizerController::paint (Graphics& g)
         g.setColour (Colours::white);
         g.fillRect (thumbnailBounds);
         
-        g.setColour (Colours::red);                                     // [8]
+        g.setColour (Colours::blueviolet);                                     // [8]
         
         thumbnail.drawChannels (g,                                      // [9]
                                 thumbnailBounds,

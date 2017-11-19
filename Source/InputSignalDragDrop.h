@@ -7,7 +7,7 @@
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
   and re-saved.
 
-  Created with Projucer version: 5.1.1
+  Created with Projucer version: 5.2.0
 
   ------------------------------------------------------------------------------
 
@@ -39,8 +39,9 @@
                                                                     //[/Comments]
 */
 class InputSignalDragDrop  : public Component,
-                             public ComboBoxListener,
-                             public ButtonListener
+                             public ComboBox::Listener,
+                             public Button::Listener,
+                             public Slider::Listener
 {
 public:
     //==============================================================================
@@ -55,6 +56,7 @@ public:
     void resized() override;
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged) override;
     void buttonClicked (Button* buttonThatWasClicked) override;
+    void sliderValueChanged (Slider* sliderThatWasMoved) override;
 
 
 
@@ -80,6 +82,8 @@ private:
     ScopedPointer<InputVisualizer> input_signal;
     ScopedPointer<ImpulseVisualizer> impulse_response;
     ScopedPointer<OutputVisualizer> convolved_signal;
+    ScopedPointer<Label> knoblabel;
+    ScopedPointer<Slider> balance_knob;
 
 
     //==============================================================================

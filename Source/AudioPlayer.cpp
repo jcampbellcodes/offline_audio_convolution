@@ -20,10 +20,13 @@ void AudioPlayer::privSetInputFile(const juce::File &file)
 {
     this->_inputFile = file;
 }
+
 void AudioPlayer::privSetImpulseFile(const juce::File &file)
 {
     this->_impulseFile = file;
+    convolution.loadImpulseResponse(this->_impulseFile, true, true, this->_impulseFile.getSize());
 }
+
 void AudioPlayer::privStartPlaying()
 {
     AudioFormatReader* reader = formatManager.createReaderFor (this->_inputFile);
@@ -81,7 +84,7 @@ void AudioPlayer::prepareToPlay (int samplesPerBlockExpected, double sampleRate)
     transportSource.prepareToPlay (samplesPerBlockExpected, sampleRate);
     
     // after here it can load the impulse response
-    convolution.loadImpulseResponse(this->_impulseFile, true, this->_impulseFile.getSize());
+
 }
 
 void AudioPlayer::reset()
@@ -95,9 +98,17 @@ void AudioPlayer::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
             bufferToFill.clearActiveBufferRegion();
     else
     {
-        dsp::AudioBlock<float> block (*bufferToFill.buffer, (size_t)bufferToFill.startSample);
-        this->convolution.process(dsp::ProcessContextReplacing<float>(block));
         transportSource.getNextAudioBlock (bufferToFill);
+        AudioSampleBuffer wetSamples;
+        
+        for(int channel = 0; channel < bufferToFill.buffer->getNumChannels(); channel++)
+        {
+            wetSamples.makeCopyOf(*bufferToFill.buffer);
+        }
+        dsp::AudioBlock<float> wet_block (wetSamples, (size_t)bufferToFill.startSample);
+        dsp::AudioBlock<float> dry_block (*bufferToFill.buffer, (size_t)bufferToFill.startSample);
+        this->convolution.process(dsp::ProcessContextReplacing<float>(wet_block));
+        dry_block.addWithMultiply(wet_block, balance);
     }
 }
 
@@ -121,7 +132,7 @@ void AudioPlayer::resized()
     // update their positions.
 }
 
-AudioPlayer::AudioPlayer()
+AudioPlayer::AudioPlayer() : balance(0.5)
 {
     this->dragDropView = new InputSignalDragDrop();
     setSize (800, 600);

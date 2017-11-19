@@ -61,6 +61,13 @@ public:
         AudioPlayer::Instance().privStartPlaying();
     }
     
+    void privSetBalance(float val) { this->balance = val; }
+    
+    static void setBalance(float val)
+    {
+        AudioPlayer::Instance().privSetBalance(val);
+    }
+    
     void changeState(TransportState newState);
     
     void changeListenerCallback (ChangeBroadcaster* source) override;
@@ -108,6 +115,8 @@ private:
     AudioTransportSource transportSource;
 
     dsp::Convolution convolution;
+    
+    float balance;
     
     File _inputFile;
     File _impulseFile;
