@@ -231,6 +231,7 @@ void InputSignalDragDrop::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_generate_btn] -- add your button handler code here..
         AudioPlayer::StartPlaying();
+        //this->convolved_signal->convolveInput();
         //[/UserButtonCode_generate_btn]
     }
 

@@ -33,6 +33,7 @@ public:
     
     void changeListenerCallback (ChangeBroadcaster* source) override;
 
+    const File& getFile() const { return this->_audioFile; }
 
 protected:
     

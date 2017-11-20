@@ -42,7 +42,7 @@
     <FILE id="y9flYc" name="readme.md" compile="0" resource="1" file="Source/readme.md"/>
   </MAINGROUP>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX">
+    <XCODE_MAC targetFolder="Builds/MacOSX" extraCompilerFlags="-std=c++14">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="offline_convolution_reverb"
                        enablePluginBinaryCopyStep="1"/>

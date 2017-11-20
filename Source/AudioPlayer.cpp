@@ -36,6 +36,7 @@ void AudioPlayer::privStartPlaying()
         ScopedPointer<AudioFormatReaderSource> newSource = new AudioFormatReaderSource (reader, true);
         transportSource.setSource (newSource, 0, nullptr, reader->sampleRate);
         readerSource = newSource.release();
+
         changeState(Starting);
     }
 }
@@ -82,9 +83,6 @@ void AudioPlayer::prepareToPlay (int samplesPerBlockExpected, double sampleRate)
     dsp::ProcessSpec spec {sampleRate, static_cast<uint32>(samplesPerBlockExpected), 2};
     convolution.prepare(spec);
     transportSource.prepareToPlay (samplesPerBlockExpected, sampleRate);
-    
-    // after here it can load the impulse response
-
 }
 
 void AudioPlayer::reset()
@@ -95,10 +93,13 @@ void AudioPlayer::reset()
 void AudioPlayer::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
 {
     if (readerSource == nullptr)
-            bufferToFill.clearActiveBufferRegion();
+    {
+        bufferToFill.clearActiveBufferRegion();
+    }
     else
     {
         transportSource.getNextAudioBlock (bufferToFill);
+        
         AudioSampleBuffer wetSamples;
         
         for(int channel = 0; channel < bufferToFill.buffer->getNumChannels(); channel++)
@@ -108,7 +109,10 @@ void AudioPlayer::getNextAudioBlock (const AudioSourceChannelInfo& bufferToFill)
         dsp::AudioBlock<float> wet_block (wetSamples, (size_t)bufferToFill.startSample);
         dsp::AudioBlock<float> dry_block (*bufferToFill.buffer, (size_t)bufferToFill.startSample);
         this->convolution.process(dsp::ProcessContextReplacing<float>(wet_block));
-        dry_block.addWithMultiply(wet_block, balance);
+        dry_block.multiply(1.0 - balance);
+        wet_block.multiply(balance);
+        dry_block.add(wet_block);
+        
     }
 }
 
